@@ -1,0 +1,44 @@
+#!/bin/bash
+
+1="Lock session"
+2="Restart system"
+3="Power off"
+4="Suspend"
+5="Cancel"
+main() {
+#  echo "Select what you would like to do.
+#1 Lock screen
+#2 Reboot
+#3 Shut down
+#4 Suspend
+#5 Cancel"
+#  read -p "> " linoption
+  echo "What would you like to do?"
+  linoption=$(gum choose "Lock session" "Restart system" "Power off" "Suspend" "Cancel")
+  case "$linoption" in
+    $1)
+      echo "Locking session..."
+      loginctl lock-session
+    ;;
+    $2)
+      echo "Ending all tasks and rebooting the system NOW!"
+      sleep 1
+      systemctl reboot
+    ;;
+    $3)
+      echo "Ending all tasks and powering off the system NOW!"
+      sleep 1
+      systemctl poweroff
+    ;;
+    $4)
+      echo "Activating suspension..."
+      sleep 1
+      systemctl suspend
+    ;;
+    $5)
+      exit
+    ;;
+    esac
+}
+
+main
