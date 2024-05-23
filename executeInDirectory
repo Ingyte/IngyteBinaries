@@ -1,11 +1,14 @@
 #!/bin/sh
 
-main() {
-  read -p "Specify the command you want to execute at path \" $@ \", or press [Ctrl] and [C] to cancel.\n>" CMD
-  PWD_OLD=$PWD
-  cd "$@"
-  /bin/sh -c "$OPT"
-  cd $PWD_OLD
-}
+if [[ $@ == --help ]]; then
+	echo "syntax: executeInDirectory <full path>"
+	exit
+else
+	echo "Specify the command you want to execute at path " $@ ", or press [Ctrl] and [C] to cancel." 
+	read -p "> " CMD
+	PWD_OLD=$PWD
+	cd "$@"
+	/bin/sh -c "$CMD"
+	cd $PWD_OLD
+fi
 
-main
