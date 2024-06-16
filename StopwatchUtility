@@ -1,0 +1,20 @@
+#!/bin/bash
+
+Time=0
+decimalTime=0
+
+main() {
+	sleep 0.01
+	clear
+	if [ $decimalTime == 90 ]
+	then
+		Time=$(($Time + 1))
+		decimalTime=0
+	else
+		decimalTime=$(($decimalTime + 1))
+	fi
+	printf "Time: ${Time}.${decimalTime}\n"
+	main
+}
+
+main
